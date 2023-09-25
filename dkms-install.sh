@@ -10,6 +10,7 @@ fi
 DRV_NAME="$(cat version | awk '{ print $1 }')"
 DRV_VERSION=$(cat version | awk '{ print $2 }')
 
+cp ./rtw88_blacklist.conf /etc/modprobe.d/rtw88_blacklist.conf
 cp -r . /usr/src/${DRV_NAME}-${DRV_VERSION}
 
 dkms add -m ${DRV_NAME} -v ${DRV_VERSION}

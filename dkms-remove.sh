@@ -7,11 +7,12 @@ else
   echo "About to run dkms removal steps..."
 fi
 
-DRV_NAME=rtl8821ce
-DRV_VERSION=v5.5.2_34066.20200325
+DRV_NAME="$(cat version | awk '{ print $1 }')"
+DRV_VERSION=$(cat version | awk '{ print $2 }')
 
 dkms remove ${DRV_NAME}/${DRV_VERSION} --all
 rm -rf /usr/src/${DRV_NAME}-${DRV_VERSION}
+rm /etc/modprobe.d/rtw88_blacklist.conf
 
 RESULT=$?
 if [[ "$RESULT" != "0" ]]; then
